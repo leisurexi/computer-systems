@@ -56,6 +56,22 @@ int tadd_ok(int x, int y) {
     return !negative && !positive;
 }
 
+// 无符号数乘法，丢弃超出位数的高位
+// 计算公式: (x * y) % 2^w
+void unsigned_multiply() {
+    unsigned char x = 127;
+    unsigned char y = 100;
+    unsigned char result = x * y;
+    printf("x: ");
+    print_binary(sizeof(char), &x);
+    printf("y: ");
+    print_binary(sizeof(char), &y);
+    printf("result: ");
+    print_binary(sizeof(result), &result);
+}
+
+
+
 
 int main() {
     // 无符合数加法
@@ -64,8 +80,10 @@ int main() {
 //    signed_add_negative_overflow();
     // 补码加法正溢出
 //    signed_add_positive_overflow();
-    int result = tadd_ok(127, 1);
-    printf("%d", result);
+//    int result = tadd_ok(127, 1);
+//    printf("%d", result);
+    // 无符号数乘法
+    unsigned_multiply();
 
     return 0;
 }
