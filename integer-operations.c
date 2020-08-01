@@ -3,6 +3,8 @@
 // Created by leisurexi on 2020/7/29.
 //
 
+
+#include <math.h>
 #include "binary-utils.h"
 
 // 无符号数加法
@@ -62,15 +64,57 @@ void unsigned_multiply() {
     unsigned char x = 127;
     unsigned char y = 100;
     unsigned char result = x * y;
-    printf("x: ");
+    printf("x dec: %d，bin: ", x);
     print_binary(sizeof(char), &x);
-    printf("y: ");
+    printf("y dec: %d, bin: ", y);
     print_binary(sizeof(char), &y);
-    printf("result: ");
+    printf("result dec: %d, bin: ", result);
     print_binary(sizeof(result), &result);
 }
 
+// 补码乘法
+// 计算公式: (x * y) % 2^w
+void signed_multiply() {
+    char x = -127;
+    char y = 100;
+    char result = x * y;
+    printf("x dec: %d，bin: ", x);
+    print_binary(sizeof(char), &x);
+    printf("y dec: %d, bin: ", y);
+    print_binary(sizeof(char), &y);
+    printf("result dec: %d, bin: ", result);
+    print_binary(sizeof(result), &result);
+}
 
+// 优化乘法，因为大多数机器上整数乘法非常慢，所以用移位和加法运算来代替
+void optimization_multiply() {
+    char x = -127;
+    char y = 64;
+    // 这里向左位移6位，就相当于乘以64
+    char result = x << 6;
+    printf("x dec: %d，bin: ", x);
+    print_binary(sizeof(char), &x);
+    printf("y dec: %d, bin: ", y);
+    print_binary(sizeof(char), &y);
+    printf("result dec: %d, bin: ", result);
+    print_binary(sizeof(result), &result);
+}
+
+// 优化除法，大多数机器上整数除法非常慢，所以除以2的幂的都可以用右移运算来替代
+void optimization_division() {
+    char x = 100;
+    char y = 4;
+    char divResult = 100  / 4;
+    char bitResult = 100 >> 2;
+    printf("x dec: %d，bin: ", x);
+    print_binary(sizeof(char), &x);
+    printf("y dec: %d, bin: ", y);
+    print_binary(sizeof(char), &y);
+    printf("divResult dec: %d, bin: ", divResult);
+    print_binary(sizeof(divResult), &divResult);
+    printf("bitResult dec: %d, bin: ", bitResult);
+    print_binary(sizeof(bitResult), &bitResult);
+}
 
 
 int main() {
@@ -83,7 +127,13 @@ int main() {
 //    int result = tadd_ok(127, 1);
 //    printf("%d", result);
     // 无符号数乘法
-    unsigned_multiply();
+//    unsigned_multiply();
+    // 有符号数乘法
+//    signed_multiply();
+    // 优化乘法
+//    optimization_multiply();
+    // 优化除法
+    optimization_division();
 
     return 0;
 }
