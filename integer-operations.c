@@ -54,7 +54,7 @@ void signed_add_positive_overflow() {
 int tadd_ok(int x, int y) {
     int result = x + y;
     int negative = x < 0 && y < 0 && result >= 0;
-    int positive = x >= 0 && y >=0 && result < 0;
+    int positive = x >= 0 && y >= 0 && result < 0;
     return !negative && !positive;
 }
 
@@ -100,11 +100,18 @@ void optimization_multiply() {
     print_binary(sizeof(result), &result);
 }
 
+// 有符号数乘法，未溢出返回1
+int signed_multiply_is_ok(int x, int y) {
+    int z = x * y;
+    // 当 x 等于0或者可以用除法验算回来的时候代表是未溢出的
+    return !x || z / x == y;
+}
+
 // 优化除法，大多数机器上整数除法非常慢，所以除以2的幂的都可以用右移运算来替代
 void optimization_division() {
     char x = 100;
     char y = 4;
-    char divResult = 100  / 4;
+    char divResult = 100 / 4;
     char bitResult = 100 >> 2;
     printf("x dec: %d，bin: ", x);
     print_binary(sizeof(char), &x);
@@ -133,7 +140,9 @@ int main() {
     // 优化乘法
 //    optimization_multiply();
     // 优化除法
-    optimization_division();
-
+//    optimization_division();
+    // 有符号数判断乘法是否溢出
+    int result = signed_multiply_is_ok(2147483647, 2);
+    printf("the result: %d\n", result);
     return 0;
 }
