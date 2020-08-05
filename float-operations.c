@@ -36,5 +36,10 @@ void floatToBinary() {
 
 int main() {
     floatToBinary();
+
+    double x = 1.0, y = -1.0, z = 0.0;
+    printf("x / z: %f\n", x / z);
+    printf("y / z: %f\n", y / z);
+
     return 0;
 }
