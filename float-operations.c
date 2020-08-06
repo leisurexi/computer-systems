@@ -61,5 +61,6 @@ int main() {
 //    float_to_binary();
     // 浮点数加法
     float_add();
+
     return 0;
 }
