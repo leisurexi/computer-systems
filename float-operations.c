@@ -9,7 +9,7 @@
 // E = e - Bias，e 爲指數的無符號表示形式， Bias float 爲 127，double 爲 1023
 
 // 浮點數機器值轉換爲真值
-void binaryToFloat() {
+void binary_to_float() {
     // S    E              M
     // 1 01111101 11000000000000000000000
     // E = 125 - 127 = -2
@@ -18,9 +18,8 @@ void binaryToFloat() {
     //   = -0.4375
 }
 
-
 // 浮點數轉換爲二進制過程示例
-void floatToBinary() {
+void float_to_binary() {
     float n = -12.75;
     // -12.75 拆分爲二進制表示
     // -12 = 1100
@@ -34,7 +33,32 @@ void floatToBinary() {
     print_binary(sizeof(float), &n);
 }
 
+// 浮点数加法
+// 十进制小数转换为二级制小数参考: https://www.cnblogs.com/xkfz007/articles/2590472.html
+void float_add() {
+    float a = 0.5;
+    float b = -0.4375;
+    // a 拆分为二进制表示，规格化形式，小数点前面必须有个1
+    // 0.5 = 0.1
+    //     = 1.000 * 2 ^ -1
+    // b 拆分为二级制表示
+    // -0.4375 = -0.0111
+    //         = -1.1110 * 2 ^ -2
+    // 对阶: 小阶向大阶看齐
+    // a = 1.000 * 2 ^ -1   b = -0.111 * 2 ^ -1
+    // 尾数加减: 1.000 * 2 ^ -1 + (-0.111 * 2 ^ -1) = 0.001 * 2 ^ -1
+    // 尾数加减后的值时非规格化的值，因为小数点前面不是1，所以要进行左规
+    // 左规: 1.000 * 2 ^ -4
+    // 十进制表示: 1.000 * 2 ^ -4 = 0.0001 = 1 / 16 = 0.0625
+    // 二进制表示: 0 01111011 10000000000000000000000
+    float c = a + b;
+    printf("%f\n", c);
+    print_binary(sizeof(float), &c);
+}
+
 int main() {
-    floatToBinary();
+//    float_to_binary();
+    // 浮点数加法
+    float_add();
     return 0;
 }
