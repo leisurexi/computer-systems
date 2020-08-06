@@ -18,6 +18,7 @@ void binary_to_float() {
     //   = -0.4375
 }
 
+
 // 浮點數轉換爲二進制過程示例
 void float_to_binary() {
     float n = -12.75;
