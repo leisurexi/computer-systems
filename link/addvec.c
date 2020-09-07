@@ -1,0 +1,12 @@
+//
+// Created by leisurexi on 9/6/20.
+//
+
+int addcnt = 0;
+
+void addvec(int *x, int *y, int *z, int n) {
+    int i;
+    addcnt++;
+    for (i = 0; i < n; i++)
+        z[i] = x[i] + y[i];
+}
